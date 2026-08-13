@@ -263,6 +263,13 @@
 
   .hero-actions {
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .hero-actions-row {
+    display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
@@ -341,6 +348,280 @@
     line-height: 1.15;
     color: var(--text);
     margin-bottom: 1.5rem;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     ORBIS MINT ANNOUNCEMENT
+     Luxury announcement section for the Orbis mint. Sits right
+     after the hero. Dark surface, drifting smoke wisps, a fine
+     grain texture, and a countdown in the PRIMALS red palette —
+     the Orbis logo keeps its own color, everything around it
+     stays on-brand — that pulses and "ticks" on every change.
+     ══════════════════════════════════════════════════════════ */
+  #orbis-announcement {
+    position: relative;
+    background:
+      radial-gradient(ellipse 60% 50% at 18% 15%, rgba(192,17,10,0.14), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 85% 85%, rgba(122,8,4,0.16), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 90% 10%, rgba(232,185,72,0.06), transparent 60%),
+      var(--black);
+    overflow: hidden;
+    padding: 7rem 2rem;
+    text-align: center;
+  }
+
+  .orbis-texture {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .orbis-smoke {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .orbis-smoke .wisp {
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    filter: blur(75px);
+    opacity: 0.4;
+  }
+  .orbis-smoke .wisp-1 {
+    background: radial-gradient(circle, rgba(192,17,10,0.38), transparent 70%);
+    top: -12%; left: 2%;
+    animation: orbis-wisp-1 17s ease-in-out infinite;
+  }
+  .orbis-smoke .wisp-2 {
+    background: radial-gradient(circle, rgba(224,26,16,0.3), transparent 70%);
+    bottom: -18%; right: 4%;
+    animation: orbis-wisp-2 21s ease-in-out infinite;
+  }
+  .orbis-smoke .wisp-3 {
+    background: radial-gradient(circle, rgba(122,8,4,0.32), transparent 70%);
+    top: 25%; right: 22%;
+    animation: orbis-wisp-3 25s ease-in-out infinite;
+  }
+  @keyframes orbis-wisp-1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(70px,45px) scale(1.15); } }
+  @keyframes orbis-wisp-2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-55px,-35px) scale(1.1); } }
+  @keyframes orbis-wisp-3 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(45px,-55px) scale(0.94); } }
+
+  .orbis-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(3,2,2,0.9) 100%);
+  }
+
+  .orbis-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .orbis-logo {
+    width: min(260px, 68vw);
+    margin-bottom: 1.75rem;
+    /* Logo keeps its own native colors — only a neutral lift, no brand tint */
+    filter: drop-shadow(0 0 30px rgba(0,0,0,0.5));
+  }
+
+  .orbis-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    color: var(--red-bright);
+    text-shadow: 0 0 24px rgba(224,26,16,0.5);
+  }
+
+  .orbis-date {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+  }
+
+  .orbis-countdown-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 1.25rem;
+  }
+
+  .orbis-countdown {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2.25rem 3.5rem;
+    background: linear-gradient(165deg, rgba(24,10,10,0.92) 0%, rgba(5,4,4,0.97) 100%);
+    border: 1px solid var(--red);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .orbis-countdown::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image: repeating-linear-gradient(
+      -55deg, transparent, transparent 3px,
+      rgba(192,17,10,0.9) 3px, rgba(192,17,10,0.9) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orbis-countdown::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(90deg, var(--red-bright), transparent 30%, transparent 70%, var(--red-bright)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .orbis-glow {
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(ellipse at center, rgba(224,26,16,0.3), transparent 70%);
+    filter: blur(28px);
+    animation: orbis-pulse 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes orbis-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  .orbis-unit {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+  }
+
+  .orbis-value {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(224,26,16,0.9), 0 0 6px rgba(224,26,16,0.9);
+    display: inline-block;
+    transition: transform 0.28s cubic-bezier(.2,.9,.3,1.3), text-shadow 0.28s ease;
+  }
+
+  .orbis-value.tick {
+    transform: scale(1.2) translateY(-5px);
+    text-shadow: 0 0 30px rgba(224,26,16,1), 0 0 12px rgba(255,255,255,0.6);
+  }
+
+  .orbis-unit-label {
+    margin-top: 0.5rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .orbis-sep {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--red-bright);
+    margin-top: 0.3rem;
+    animation: orbis-sep-blink 1s steps(1) infinite;
+  }
+  @keyframes orbis-sep-blink {
+    0%, 49% { opacity: 0.75; }
+    50%, 100% { opacity: 0.2; }
+  }
+
+  .orbis-started {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .orbis-started-text {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--red-bright);
+    text-shadow: 0 0 26px rgba(224,26,16,0.6);
+  }
+  .orbis-mint-btn {
+    padding: 1rem 2.75rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    background: var(--red-bright);
+    border: 1px solid var(--red-bright);
+    box-shadow: 0 0 12px rgba(224,26,16,0.55), 0 0 28px rgba(224,26,16,0.3);
+    animation: orbis-btn-glow 2.2s ease-in-out infinite;
+  }
+  .orbis-mint-btn:hover {
+    background: var(--red-bright);
+    box-shadow: 0 0 18px rgba(224,26,16,0.8), 0 0 42px rgba(224,26,16,0.5);
+  }
+  @keyframes orbis-btn-glow {
+    0%, 100% { box-shadow: 0 0 12px rgba(224,26,16,0.55), 0 0 28px rgba(224,26,16,0.3); }
+    50% { box-shadow: 0 0 20px rgba(224,26,16,0.85), 0 0 46px rgba(224,26,16,0.55); }
+  }
+
+  .orbis-supply {
+    margin-top: 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+    letter-spacing: 0.08em;
+    color: var(--text);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 720px) {
+    #orbis-announcement { padding: 4.5rem 1.25rem; }
+    .orbis-logo { width: min(190px, 62vw); margin-bottom: 1.25rem; }
+    .orbis-date { margin-bottom: 2.25rem; font-size: 0.72rem; }
+    .orbis-countdown { padding: 1.5rem 1.15rem; gap: 0.7rem; }
+    .orbis-unit { min-width: 46px; }
+    .orbis-value { font-size: clamp(1.5rem, 8vw, 2.1rem); }
+    .orbis-unit-label { font-size: 0.55rem; }
+    .orbis-sep { font-size: 1.35rem; margin-top: 0.1rem; }
+    .orbis-countdown-label { font-size: 0.62rem; letter-spacing: 0.28em; }
+    .orbis-supply { margin-top: 2rem; font-size: 1rem; }
+    .orbis-started-text { font-size: 1.35rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbis-glow, .orbis-sep, .orbis-mint-btn { animation: none; }
+    .orbis-smoke .wisp { animation: none; }
   }
 
   /* LORE */
@@ -716,7 +997,8 @@
     .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.28em; margin-bottom: 0.85rem; }
     .hero-headline { font-size: clamp(1.75rem, 8.5vw, 2.6rem); line-height: 1.1; margin-bottom: 1.1rem; }
     .hero-sub { font-size: 0.88rem; line-height: 1.75; margin-bottom: 2rem; max-width: 90%; }
-    .hero-actions { flex-direction: column; align-items: center; gap: 0.75rem; width: 100%; }
+    .hero-actions { width: 100%; gap: 0.75rem; }
+    .hero-actions-row { flex-direction: column; align-items: center; gap: 0.75rem; width: 100%; }
     .hero-actions a { width: min(280px, 80vw); text-align: center; padding: 0.9rem 1.5rem; font-size: 0.75rem; }
     .hero-corner { width: 28px; height: 28px; }
     .hero-corner.tl { top: 4.5rem; left: 1rem; }
@@ -766,6 +1048,10 @@
     /* NOTIFY */
     .notify-form { flex-direction: column; }
     .notify-input { border-right: 1px solid var(--border); border-bottom: none; }
+
+    /* COUNTDOWN (simple) */
+    .countdown-simple-text { font-size: 0.92rem; }
+    .countdown-simple-text span { font-size: 1.25rem; }
   }
 
   /* Very small screens */
@@ -1396,51 +1682,23 @@
     z-index: 1;
   }
 
-  .countdown-units {
+  .countdown-simple-text {
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7rem;
     z-index: 1;
-  }
-
-  .countdown-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 56px;
-  }
-
-  .countdown-value {
     font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: 2.3rem;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(224,26,16,0.9), 0 0 6px rgba(224,26,16,0.9);
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.03em;
+    text-align: center;
   }
 
-  .countdown-unit-label {
-    margin-top: 0.4rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .countdown-sep {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: 1.9rem;
+  .countdown-simple-text span {
     color: var(--red-bright);
-    margin-top: 0.15rem;
-    animation: countdown-blink 1s steps(1) infinite;
-  }
-
-  @keyframes countdown-blink {
-    0%, 49% { opacity: 0.7; }
-    50%, 100% { opacity: 0.15; }
+    font-size: 1.7rem;
+    font-weight: 900;
+    text-shadow: 0 0 16px rgba(224,26,16,0.8);
+    font-variant-numeric: tabular-nums;
   }
 
   .countdown.ended {
@@ -1461,17 +1719,12 @@
 
   @media (max-width: 720px) {
     .countdown { padding: 1.4rem 1.4rem; gap: 0.7rem; }
-    .countdown-value { font-size: 1.55rem; }
-    .countdown-unit { min-width: 42px; }
-    .countdown-unit-label { font-size: 0.54rem; }
-    .countdown-sep { font-size: 1.3rem; margin-top: 0.05rem; }
     .countdown-label { font-size: 0.6rem; letter-spacing: 0.26em; }
     .countdown-ended-text { font-size: 0.92rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .countdown-glow { animation: none; opacity: 0.6; }
-    .countdown-sep { animation: none; opacity: 0.8; }
   }
 
   @media (max-width: 720px) {
@@ -1777,17 +2030,73 @@
       On Solana
     </div>
     <img src="primals-logo.jpg" alt="PRIMALS" class="hero-logo" />
-    <p class="hero-eyebrow">A new NFT collection. Coming soon.</p>
+    <p class="hero-eyebrow">Coming soon.</p>
     <h1 class="hero-headline">Not fully apes.<br>Not fully human.<br><span>Something else entirely.</span></h1>
     <p class="hero-sub">An ancient species awakens. Evolution is not a destination, it is a reckoning.</p>
     <div class="hero-actions">
-      <a href="https://primalswiztest.netlify.app/checkeligibility" class="btn-solid btn-glow">Check Eligibility</a>
-      <a href="https://discord.gg/ZRrWFfRVez" target="_blank" class="btn-outline">Join Discord</a>
-      <a href="https://x.com/primalsnftx" target="_blank" class="btn-outline">Follow on X</a>
-     <a href="https://www.primalsnft.xyz/primaldash" target="_blank" class="btn-solid">Play Primal Dash</a>
+      <div class="hero-actions-row">
+        <a href="https://primalsnft.xyz/checkeligibility" class="btn-solid btn-glow">Check Eligibility</a>
+        <a href="https://www.primalsnft.xyz/primaldash" target="_blank" class="btn-solid">Play Primal Dash</a>
+      </div>
+      <div class="hero-actions-row">
+        <a href="https://discord.gg/ZRrWFfRVez" target="_blank" class="btn-outline">Join Discord</a>
+        <a href="https://x.com/primalsnftx" target="_blank" class="btn-outline">Follow on X</a>
+      </div>
     </div>
   </div>
 </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ORBIS MINT ANNOUNCEMENT -->
+<section id="orbis-announcement">
+  <div class="orbis-texture"></div>
+  <div class="orbis-smoke">
+    <div class="wisp wisp-1"></div>
+    <div class="wisp wisp-2"></div>
+    <div class="wisp wisp-3"></div>
+  </div>
+  <div class="orbis-vignette"></div>
+  <div class="container orbis-inner fade-in">
+    <img src="orbis-logo.png" alt="ORBIS" class="orbis-logo" />
+    <p class="orbis-eyebrow">Launching on Orbis</p>
+    <p class="orbis-date">25 August 2026</p>
+   <p class="orbis-date">5:00 PM UTC</p>
+
+    <div id="orbis-countdown-wrap">
+      <p class="orbis-countdown-label">Awakening in</p>
+      <div class="orbis-countdown" id="orbis-countdown" aria-live="polite">
+        <div class="orbis-glow"></div>
+        <div class="orbis-unit">
+          <span class="orbis-value" id="orbis-days">00</span>
+          <span class="orbis-unit-label">Days</span>
+        </div>
+        <span class="orbis-sep">:</span>
+        <div class="orbis-unit">
+          <span class="orbis-value" id="orbis-hours">00</span>
+          <span class="orbis-unit-label">Hours</span>
+        </div>
+        <span class="orbis-sep">:</span>
+        <div class="orbis-unit">
+          <span class="orbis-value" id="orbis-mins">00</span>
+          <span class="orbis-unit-label">Minutes</span>
+        </div>
+        <span class="orbis-sep">:</span>
+        <div class="orbis-unit">
+          <span class="orbis-value" id="orbis-secs">00</span>
+          <span class="orbis-unit-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orbis-started" id="orbis-started" style="display: none;">
+      <p class="orbis-started-text">Awakening Begins</p>
+      <a href="https://primalsnft.xyz/mint" target="_blank" class="btn-solid orbis-mint-btn">Mint on Orbis</a>
+    </div>
+
+    <p class="orbis-supply">5,555 PRIMALS</p>
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -1844,22 +2153,13 @@
     </div>
 
     <div class="contest-footer fade-in">
-      <div class="countdown" id="countdown" aria-live="polite">
+      <div class="countdown countdown-simple" id="countdown" aria-live="polite">
         <div class="countdown-glow"></div>
         <div class="countdown-corner tl"></div>
         <div class="countdown-corner tr"></div>
         <div class="countdown-corner bl"></div>
         <div class="countdown-corner br"></div>
-        <p class="countdown-label">Submissions close in</p>
-        <div class="countdown-units">
-          <div class="countdown-unit"><span class="countdown-value" id="cd-days">00</span><span class="countdown-unit-label">Days</span></div>
-          <span class="countdown-sep">:</span>
-          <div class="countdown-unit"><span class="countdown-value" id="cd-hours">00</span><span class="countdown-unit-label">Hrs</span></div>
-          <span class="countdown-sep">:</span>
-          <div class="countdown-unit"><span class="countdown-value" id="cd-mins">00</span><span class="countdown-unit-label">Min</span></div>
-          <span class="countdown-sep">:</span>
-          <div class="countdown-unit"><span class="countdown-value" id="cd-secs">00</span><span class="countdown-unit-label">Sec</span></div>
-        </div>
+        <p class="countdown-simple-text">Submissions close in <span id="cd-days-simple">–</span> days</p>
       </div>
     </div>
   </div>
@@ -2233,27 +2533,71 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   });
 })();
 
-// Art contest countdown — live, no daily updates needed
+// Orbis mint countdown — large glowing timer that "ticks" on every digit change
 (function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
+  const TARGET = Date.UTC(2026, 7, 25, 17, 0, 0); // 25 Aug 2026, 5:00 PM UTC
 
-  // Fixed target: Aug 15, 2026, 5:00 PM UTC
-  const TARGET = Date.UTC(2026, 7, 15, 17, 0, 0);
+  const wrap = document.getElementById('orbis-countdown-wrap');
+  const started = document.getElementById('orbis-started');
+  const dEl = document.getElementById('orbis-days');
+  const hEl = document.getElementById('orbis-hours');
+  const mEl = document.getElementById('orbis-mins');
+  const sEl = document.getElementById('orbis-secs');
+  if (!wrap || !started) return;
 
-  const dEl = document.getElementById('cd-days');
-  const hEl = document.getElementById('cd-hours');
-  const mEl = document.getElementById('cd-mins');
-  const sEl = document.getElementById('cd-secs');
+  const prev = { d: null, h: null, m: null, s: null };
   let timer = null;
 
   function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick(el, key, val) {
+    const str = pad(val);
+    if (prev[key] !== str) {
+      el.textContent = str;
+      if (prev[key] !== null) {
+        el.classList.add('tick');
+        setTimeout(() => el.classList.remove('tick'), 260);
+      }
+      prev[key] = str;
+    }
+  }
 
   function render() {
     const diff = TARGET - Date.now();
 
     if (diff <= 0) {
       if (timer) clearInterval(timer);
+      wrap.style.display = 'none';
+      started.style.display = 'flex';
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    tick(dEl, 'd', days);
+    tick(hEl, 'h', hours);
+    tick(mEl, 'm', mins);
+    tick(sEl, 's', secs);
+  }
+
+  render();
+  timer = setInterval(render, 1000);
+})();
+
+// Art contest — "Submissions close in X day(s)" (no live seconds, refreshes hourly)
+(function() {
+  const TARGET = Date.UTC(2026, 7, 15, 17, 0, 0); // 15 Aug 2026, 5:00 PM UTC
+  const el = document.getElementById('countdown');
+  const span = document.getElementById('cd-days-simple');
+  if (!el || !span) return;
+
+  function render() {
+    const diff = TARGET - Date.now();
+
+    if (diff <= 0) {
       el.classList.add('ended');
       el.innerHTML = `
         <div class="countdown-glow"></div>
@@ -2266,19 +2610,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       return;
     }
 
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins = Math.floor((diff % 3600000) / 60000);
-    const secs = Math.floor((diff % 60000) / 1000);
-
-    dEl.textContent = pad(days);
-    hEl.textContent = pad(hours);
-    mEl.textContent = pad(mins);
-    sEl.textContent = pad(secs);
+    const days = Math.max(1, Math.ceil(diff / 86400000));
+    span.textContent = days;
   }
 
   render();
-  timer = setInterval(render, 1000);
+  setInterval(render, 60 * 60 * 1000);
 })();
 </script>
 

@@ -55,6 +55,9 @@
     --silver-bright: #F0F2F5;
     --bronze: #C97C4C;
     --bronze-bright: #E8A574;
+    --orbis-1: #7A5CFF;
+    --orbis-2: #C042E0;
+    --orbis-3: #FF7A5C;
   }
 
   html { scroll-behavior: smooth; }
@@ -1273,6 +1276,39 @@
     color: var(--card-accent);
   }
 
+  .prize-extra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    max-width: 620px;
+    margin: 1.75rem auto 0;
+  }
+
+  .prize-extra-card {
+    background: linear-gradient(165deg, var(--surface2) 0%, var(--black) 65%);
+    border: 1px solid var(--border);
+    padding: 1.35rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .prize-extra-card:hover { border-color: var(--red); transform: translateY(-3px); }
+
+  .prize-extra-rank {
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 0.5rem;
+  }
+
+  .prize-extra-reward {
+    font-family: 'Cinzel', serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
   .contest-rules {
     max-width: 620px;
     margin: 3rem auto 0;
@@ -1453,6 +1489,95 @@
     .countdown-glow { animation: none; opacity: 0.6; }
   }
 
+  /* COMPACT CONTEST COUNTDOWN — smaller D:H:M:S frame with the date below it */
+  .contest-countdown {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .contest-countdown-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+  }
+
+  .contest-countdown-frame {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    min-width: 220px;
+    background: linear-gradient(165deg, rgba(24,10,10,0.92) 0%, rgba(5,4,4,0.97) 100%);
+    border: 1px solid var(--red);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .contest-countdown-units {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .contest-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 32px;
+  }
+
+  .contest-value {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(224,26,16,0.75);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .contest-unit-label {
+    margin-top: 0.3rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .contest-sep {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--red-deep);
+    margin-top: 0.1rem;
+  }
+
+  .contest-countdown-ended {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cinzel', serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+  }
+
+  .contest-countdown-date {
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
   @media (max-width: 720px) {
     .prize-grid { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 2rem; }
     .prize-card[data-rank="gold"],
@@ -1539,6 +1664,35 @@
 
   .orbis-header-text { max-width: 560px; }
 
+  .orbis-first-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: linear-gradient(90deg, rgba(122,92,255,0.1), rgba(192,66,224,0.1), rgba(255,122,92,0.1));
+    border: 1px solid transparent;
+    border-image: linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3)) 1;
+    background-clip: padding-box;
+    color: transparent;
+    background-image: linear-gradient(90deg, rgba(122,92,255,0.1), rgba(192,66,224,0.1), rgba(255,122,92,0.1)), linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3));
+    -webkit-background-clip: padding-box, text;
+    background-clip: padding-box, text;
+    -webkit-text-fill-color: transparent;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .orbis-first-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3));
+    flex-shrink: 0;
+    animation: blink 1.8s ease-in-out infinite;
+  }
+
   .orbis-header .section-title { margin-bottom: 0.6rem; }
 
   .orbis-header-meta {
@@ -1556,7 +1710,7 @@
   }
 
   .orbis-logo {
-    width: 108px;
+    width: 172px;
     flex-shrink: 0;
     filter: drop-shadow(0 0 22px rgba(0,0,0,0.5));
   }
@@ -1688,21 +1842,8 @@
     color: var(--text-muted);
   }
 
-  .orbis-started {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1.1rem;
-  }
-  .orbis-started-text {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(1.3rem, 2.6vw, 1.7rem);
-    font-weight: 900;
-    letter-spacing: 0.04em;
-    color: var(--red-bright);
-    text-shadow: 0 0 22px rgba(224,26,16,0.55);
-  }
   .orbis-mint-btn {
+    margin-top: 1.4rem;
     padding: 0.85rem 2.25rem;
     font-size: 0.78rem;
     letter-spacing: 0.18em;
@@ -1730,19 +1871,18 @@
       border-left: none;
       border-top: 1px solid var(--border);
     }
-    .orbis-started { align-items: flex-start; }
   }
 
   @media (max-width: 720px) {
     .orbis-header { flex-direction: column-reverse; align-items: flex-start; gap: 1.25rem; margin-bottom: 2rem; }
-    .orbis-logo { width: 72px; }
+    .orbis-first-badge { font-size: 0.6rem; padding: 0.4rem 0.75rem; margin-bottom: 0.9rem; }
+    .orbis-logo { width: 112px; }
     .orbis-header-meta { font-size: 0.78rem; gap: 1rem 1.25rem; }
     .orbis-countdown { gap: 1rem; }
     .orbis-unit { min-width: 44px; }
     .orbis-value { font-size: clamp(1.5rem, 8vw, 2rem); }
     .orbis-sep { font-size: 1.3rem; }
     .orbis-supply { font-size: 1.05rem; }
-    .orbis-started-text { font-size: 1.25rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1903,8 +2043,9 @@
 
   .loader-progress {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.6rem;
     margin-top: 1.6rem;
     opacity: 0;
     will-change: opacity;
@@ -1943,7 +2084,7 @@
     letter-spacing: 0.05em;
     color: var(--loader-gold-bright);
     min-width: 2.8em;
-    text-align: left;
+    text-align: center;
     font-variant-numeric: tabular-nums;
   }
 
@@ -2041,7 +2182,6 @@
       On Solana
     </div>
     <img src="primals-logo.jpg" alt="PRIMALS" class="hero-logo" />
-    <p class="hero-eyebrow">Coming soon.</p>
     <h1 class="hero-headline">Not fully apes.<br>Not fully human.<br><span>Something else entirely.</span></h1>
     <p class="hero-sub">An ancient species awakens. Evolution is not a destination, it is a reckoning.</p>
     <div class="hero-actions">
@@ -2071,11 +2211,10 @@
 
     <div class="orbis-header">
       <div class="orbis-header-text">
-        <p class="section-eyebrow">Launching on Orbis</p>
-        <h2 class="section-title">The Awakening begins.</h2>
+        <p class="orbis-first-badge"><span class="orbis-first-dot"></span>Primals will be the first project to launch on the Orbis Launchpad</p>
+        <h2 class="section-title">Launching on Orbis</h2>
         <div class="orbis-header-meta">
-          <span><strong>25 August 2026</strong> · 5:00 PM UTC</span>
-          <span><strong>5,555</strong> Primals</span>
+          <span><strong>25TH AUGUST 2026</strong> · <strong>5:00 PM UTC</strong></span>
         </div>
       </div>
       <img src="orbis-logo.png" alt="ORBIS" class="orbis-logo" />
@@ -2085,7 +2224,7 @@
       <div class="orbis-panel-glow"></div>
 
       <div class="orbis-panel-left" id="orbis-countdown-wrap">
-        <p class="orbis-countdown-label">Awakening in</p>
+        <p class="orbis-countdown-label" id="orbis-countdown-label">Awakening in</p>
         <div class="orbis-countdown" id="orbis-countdown" aria-live="polite">
           <div class="orbis-unit">
             <span class="orbis-value" id="orbis-days">00</span>
@@ -2107,17 +2246,11 @@
             <span class="orbis-unit-label">Seconds</span>
           </div>
         </div>
+        <a href="https://primalsnft.xyz/mint" target="_blank" class="btn-solid orbis-mint-btn" id="orbis-mint-btn" style="display: none;">Mint on Orbis</a>
       </div>
 
       <div class="orbis-panel-right">
-        <div id="orbis-supply-block">
-          <p class="orbis-supply">5,555<span>Total Supply</span></p>
-        </div>
-      </div>
-
-      <div class="orbis-started" id="orbis-started" style="display: none;">
-        <p class="orbis-started-text">Awakening Begins</p>
-        <a href="https://primalsnft.xyz/mint" target="_blank" class="btn-solid orbis-mint-btn">Mint on Orbis</a>
+        <p class="orbis-supply">5,555<span>Primals</span></p>
       </div>
     </div>
 
@@ -2167,6 +2300,17 @@
       </div>
     </div>
 
+    <div class="prize-extra-grid fade-in">
+      <div class="prize-extra-card">
+        <p class="prize-extra-rank">4th &amp; 5th Place</p>
+        <p class="prize-extra-reward">1/1 of your art</p>
+      </div>
+      <div class="prize-extra-card">
+        <p class="prize-extra-rank">6th – 10th Place</p>
+        <p class="prize-extra-reward">Mint role upgrade</p>
+      </div>
+    </div>
+
     <div class="contest-rules fade-in">
       <h3>How to enter</h3>
       <ol>
@@ -2178,13 +2322,38 @@
     </div>
 
     <div class="contest-footer fade-in">
-      <div class="countdown countdown-simple" id="countdown" aria-live="polite">
-        <div class="countdown-glow"></div>
-        <div class="countdown-corner tl"></div>
-        <div class="countdown-corner tr"></div>
-        <div class="countdown-corner bl"></div>
-        <div class="countdown-corner br"></div>
-        <p class="countdown-simple-text">Submissions close in <span id="cd-days-simple">–</span> days</p>
+      <div class="contest-countdown" id="contest-countdown" aria-live="polite">
+        <p class="contest-countdown-label">Submission close in</p>
+        <div class="contest-countdown-frame">
+          <div class="countdown-glow"></div>
+          <div class="countdown-corner tl"></div>
+          <div class="countdown-corner tr"></div>
+          <div class="countdown-corner bl"></div>
+          <div class="countdown-corner br"></div>
+          <div class="contest-countdown-units" id="contest-countdown-units">
+            <div class="contest-unit">
+              <span class="contest-value" id="cc-days">00</span>
+              <span class="contest-unit-label">D</span>
+            </div>
+            <span class="contest-sep">:</span>
+            <div class="contest-unit">
+              <span class="contest-value" id="cc-hours">00</span>
+              <span class="contest-unit-label">H</span>
+            </div>
+            <span class="contest-sep">:</span>
+            <div class="contest-unit">
+              <span class="contest-value" id="cc-mins">00</span>
+              <span class="contest-unit-label">M</span>
+            </div>
+            <span class="contest-sep">:</span>
+            <div class="contest-unit">
+              <span class="contest-value" id="cc-secs">00</span>
+              <span class="contest-unit-label">S</span>
+            </div>
+          </div>
+          <p class="contest-countdown-ended" id="contest-countdown-ended" style="display: none;">Submissions Closed</p>
+        </div>
+        <p class="contest-countdown-date">15TH AUGUST 2026 · 5:00 PM UTC</p>
       </div>
     </div>
   </div>
@@ -2562,14 +2731,14 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 (function() {
   const TARGET = Date.UTC(2026, 7, 25, 17, 0, 0); // 25 Aug 2026, 5:00 PM UTC
 
-  const wrap = document.getElementById('orbis-countdown-wrap');
-  const started = document.getElementById('orbis-started');
-  const supplyBlock = document.getElementById('orbis-supply-block');
+  const labelEl = document.getElementById('orbis-countdown-label');
+  const countdownEl = document.getElementById('orbis-countdown');
+  const mintBtn = document.getElementById('orbis-mint-btn');
   const dEl = document.getElementById('orbis-days');
   const hEl = document.getElementById('orbis-hours');
   const mEl = document.getElementById('orbis-mins');
   const sEl = document.getElementById('orbis-secs');
-  if (!wrap || !started) return;
+  if (!labelEl || !countdownEl) return;
 
   const prev = { d: null, h: null, m: null, s: null };
   let timer = null;
@@ -2593,9 +2762,9 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     if (diff <= 0) {
       if (timer) clearInterval(timer);
-      wrap.style.display = 'none';
-      if (supplyBlock) supplyBlock.style.display = 'none';
-      started.style.display = 'flex';
+      labelEl.textContent = 'Awakening Begins';
+      countdownEl.style.display = 'none';
+      if (mintBtn) mintBtn.style.display = 'inline-block';
       return;
     }
 
@@ -2614,35 +2783,44 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   timer = setInterval(render, 1000);
 })();
 
-// Art contest — "Submissions close in X day(s)" (no live seconds, refreshes hourly)
+// Art contest countdown — compact D:H:M:S timer, target date shown below the frame
 (function() {
   const TARGET = Date.UTC(2026, 7, 15, 17, 0, 0); // 15 Aug 2026, 5:00 PM UTC
-  const el = document.getElementById('countdown');
-  const span = document.getElementById('cd-days-simple');
-  if (!el || !span) return;
+
+  const unitsEl = document.getElementById('contest-countdown-units');
+  const endedEl = document.getElementById('contest-countdown-ended');
+  const dEl = document.getElementById('cc-days');
+  const hEl = document.getElementById('cc-hours');
+  const mEl = document.getElementById('cc-mins');
+  const sEl = document.getElementById('cc-secs');
+  if (!unitsEl || !endedEl) return;
+
+  let timer = null;
+  function pad(n) { return String(n).padStart(2, '0'); }
 
   function render() {
     const diff = TARGET - Date.now();
 
     if (diff <= 0) {
-      el.classList.add('ended');
-      el.innerHTML = `
-        <div class="countdown-glow"></div>
-        <div class="countdown-corner tl"></div>
-        <div class="countdown-corner tr"></div>
-        <div class="countdown-corner bl"></div>
-        <div class="countdown-corner br"></div>
-        <p class="countdown-ended-text">Art contest ended.<br>Thanks for your participation.</p>
-      `;
+      if (timer) clearInterval(timer);
+      unitsEl.style.display = 'none';
+      endedEl.style.display = 'block';
       return;
     }
 
-    const days = Math.max(1, Math.ceil(diff / 86400000));
-    span.textContent = days;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    dEl.textContent = pad(days);
+    hEl.textContent = pad(hours);
+    mEl.textContent = pad(mins);
+    sEl.textContent = pad(secs);
   }
 
   render();
-  setInterval(render, 60 * 60 * 1000);
+  timer = setInterval(render, 1000);
 })();
 </script>
 

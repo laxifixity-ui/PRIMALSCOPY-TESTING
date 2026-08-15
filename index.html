@@ -71,10 +71,74 @@
     overflow-x: hidden;
   }
 
+  /* STICKY TOP TICKER — mint countdown, pinned above the nav so it stays
+     visible at every scroll position. */
+  :root {
+    --ticker-h: 34px;
+    --ticker-h-mobile: 30px;
+  }
+
+  #top-ticker {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 101;
+    height: var(--ticker-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0 1rem;
+    background: linear-gradient(90deg, var(--red-deep), var(--red-bright), var(--red-deep));
+    border-bottom: 1px solid var(--red-bright);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #top-ticker::-webkit-scrollbar { display: none; }
+
+  #top-ticker .ticker-label { flex-shrink: 0; opacity: 0.95; }
+
+  #top-ticker .ticker-time {
+    flex-shrink: 0;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 8px rgba(0,0,0,0.4);
+  }
+
+  #top-ticker a {
+    flex-shrink: 0;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 0.15rem;
+  }
+
+  @media (max-width: 720px) {
+    #top-ticker {
+      height: var(--ticker-h-mobile);
+      font-size: 0.6rem;
+      gap: 0.4rem;
+      padding: 0 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #top-ticker { position: sticky; }
+  }
+
   /* NAV */
   nav {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: var(--ticker-h); left: 0; right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -192,7 +256,7 @@
     position: relative;
     overflow: hidden;
     text-align: center;
-    padding: 6rem 2rem 4rem;
+    padding: calc(6rem + var(--ticker-h)) 2rem 4rem;
   }
 
   .hero-bg {
@@ -719,7 +783,7 @@
     .nav-cta { gap: 0.5rem; margin-left: auto; }
 
     /* HERO */
-    #hero { min-height: 100svh; padding: 5.5rem 1.5rem 5rem; align-items: center; }
+    #hero { min-height: 100svh; padding: calc(5.5rem + var(--ticker-h-mobile)) 1.5rem 5rem; align-items: center; }
     .hero-content { width: 100%; max-width: 100%; display: flex; flex-direction: column; align-items: center; }
     .hero-logo { width: min(260px, 72vw); margin-bottom: 1.75rem; }
     .solana-badge { font-size: 0.65rem; padding: 0.28rem 0.65rem; margin-bottom: 1.5rem; }
@@ -1366,6 +1430,36 @@
     margin-top: 2.5rem;
   }
 
+  /* CONTEST — ended state (muted, non-competing with the mint spotlight) */
+  #contest.contest-ended {
+    opacity: 0.82;
+  }
+  #contest.contest-ended .btn-glow,
+  #contest.contest-ended .contest-view-btn {
+    animation: none;
+    box-shadow: none;
+  }
+  .contest-ended-banner {
+    display: none;
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid var(--red);
+    background: rgba(192,17,10,0.08);
+    text-align: center;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    color: var(--text);
+  }
+  .contest-ended-banner strong {
+    color: var(--red-bright);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  #contest.contest-ended .contest-ended-banner {
+    display: block;
+  }
+
   /* COUNTDOWN — primal-styled, glowing ember timer */
   .countdown {
     position: relative;
@@ -1664,30 +1758,38 @@
 
   .orbis-header-text { max-width: 560px; }
 
-  .orbis-first-badge {
-    display: inline-flex;
+  /* Full-width banner — spans the entire section edge-to-edge, above the
+     header, instead of the old small centered pill. */
+  .orbis-first-banner {
+    position: relative;
+    z-index: 2;
+    display: flex;
     align-items: center;
-    gap: 0.55rem;
-    background: linear-gradient(90deg, rgba(138,106,234,0.1), rgba(103,158,227,0.1), rgba(116,247,158,0.1));
-    border: 1px solid transparent;
-    border-image: linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3)) 1;
-    background-clip: padding-box;
-    color: transparent;
-    background-image: linear-gradient(90deg, rgba(138,106,234,0.1), rgba(103,158,227,0.1), rgba(116,247,158,0.1)), linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3));
-    -webkit-background-clip: padding-box, text;
-    background-clip: padding-box, text;
-    -webkit-text-fill-color: transparent;
-    font-size: 0.66rem;
+    justify-content: center;
+    gap: 0.65rem;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(138,106,234,0.14), rgba(103,158,227,0.14), rgba(116,247,158,0.14));
+    border-top: 1px solid rgba(138,106,234,0.4);
+    border-bottom: 1px solid rgba(116,247,158,0.4);
+  }
+
+  .orbis-first-banner-text {
+    font-size: 0.78rem;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.45rem 0.9rem;
-    margin-bottom: 1.1rem;
+    background-image: linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .orbis-first-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: linear-gradient(90deg, var(--orbis-1), var(--orbis-2), var(--orbis-3));
     flex-shrink: 0;
@@ -1880,7 +1982,8 @@
 
   @media (max-width: 720px) {
     .orbis-header { flex-direction: column-reverse; align-items: flex-start; gap: 1.25rem; margin-bottom: 2rem; }
-    .orbis-first-badge { font-size: 0.6rem; padding: 0.4rem 0.75rem; margin-bottom: 0.9rem; }
+    .orbis-first-banner { padding: 0.65rem 1rem; margin-bottom: 2rem; gap: 0.5rem; }
+    .orbis-first-banner-text { font-size: 0.62rem; letter-spacing: 0.1em; line-height: 1.5; }
     .orbis-logo { width: 112px; }
     .orbis-header-meta { font-size: 0.78rem; gap: 1rem 1.25rem; }
     .orbis-countdown { gap: 1rem; }
@@ -2148,6 +2251,14 @@
   </div>
 </div>
 
+<div id="top-ticker" role="status" aria-live="polite">
+  <span class="ticker-label" id="ticker-label">🔥 Minting on Orbis in</span>
+  <span class="ticker-time" id="ticker-time">
+    <span id="ticker-days">00</span>d <span id="ticker-hours">00</span>h <span id="ticker-mins">00</span>m <span id="ticker-secs">00</span>s
+  </span>
+  <a href="#" target="_blank" id="ticker-link" style="display: none;">Mint →</a>
+</div>
+
 <nav>
   <a href="#" class="nav-logo">PRIMALS</a>
   <ul class="nav-links">
@@ -2212,11 +2323,16 @@
     <div class="wisp wisp-1"></div>
     <div class="wisp wisp-2"></div>
   </div>
+
+  <div class="orbis-first-banner fade-in">
+    <span class="orbis-first-dot"></span>
+    <span class="orbis-first-banner-text">Primals will be the first project to launch on the Orbis Launchpad</span>
+  </div>
+
   <div class="container orbis-inner fade-in">
 
     <div class="orbis-header">
       <div class="orbis-header-text">
-        <p class="orbis-first-badge"><span class="orbis-first-dot"></span>Primals will be the first project to launch on the Orbis Launchpad</p>
         <h2 class="section-title">Launching on Orbis</h2>
         <div class="orbis-header-meta">
           <span><strong>25TH AUGUST 2026</strong> · <strong>5:00 PM UTC</strong></span>
@@ -2251,7 +2367,7 @@
             <span class="orbis-unit-label">Seconds</span>
           </div>
         </div>
-        <a href="https://primalsnft.xyz/mint" target="_blank" class="btn-solid orbis-mint-btn" id="orbis-mint-btn" style="display: none;">Mint on Orbis</a>
+        <a href="#" target="_blank" class="btn-solid orbis-mint-btn" id="orbis-mint-btn" style="display: none;">Mint on Orbis</a>
       </div>
 
       <div class="orbis-panel-right">
@@ -2269,6 +2385,9 @@
   <div class="container">
     <div class="contest-intro fade-in">
       <h2 class="section-title">Art Contest</h2>
+      <p class="contest-ended-banner" id="contest-ended-banner">
+        <strong>Contest Ended</strong> — Winners will be announced on Mint Day (25th August).
+      </p>
       <a href="https://x.com/primalsnftx/status/2079990613831778435?s=46" target="_blank" class="btn-solid contest-view-btn">View Art Contest on X</a>
       <p class="contest-pool" style="margin-top: 1.75rem;">$2,000 in total rewards for the top 3</p>
       <p class="contest-desc">Draw a custom 1/1 using our Naked Primal template. Every winner gets their art minted on chain as a real Primals NFT.</p>
@@ -2356,9 +2475,9 @@
               <span class="contest-unit-label">SEC</span>
             </div>
           </div>
-          <p class="contest-countdown-ended" id="contest-countdown-ended" style="display: none;">Submissions Closed</p>
+          <p class="contest-countdown-ended" id="contest-countdown-ended" style="display: none;">Winners announced on Mint Day</p>
         </div>
-        <p class="contest-countdown-date">15TH AUGUST 2026 · 5:00 PM UTC</p>
+        <p class="contest-countdown-date">25TH AUGUST 2026 · 5:00 PM UTC</p>
       </div>
     </div>
   </div>
@@ -2768,9 +2887,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     if (diff <= 0) {
       if (timer) clearInterval(timer);
-      labelEl.textContent = 'Awakening Begins';
+      labelEl.textContent = 'AWAKENING NOW';
       countdownEl.style.display = 'none';
-      if (mintBtn) mintBtn.style.display = 'inline-block';
+      if (mintBtn) {
+        mintBtn.textContent = 'MINT ON ORBIS';
+        mintBtn.style.display = 'inline-block';
+      }
       return;
     }
 
@@ -2789,12 +2911,61 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   timer = setInterval(render, 1000);
 })();
 
-// Art contest countdown — compact D:H:M:S timer, target date shown below the frame
+// Sticky top ticker — mini live countdown to the same mint target, always visible
+(function() {
+  const TARGET = Date.UTC(2026, 7, 25, 17, 0, 0); // 25 Aug 2026, 5:00 PM UTC
+
+  const labelEl = document.getElementById('ticker-label');
+  const timeEl = document.getElementById('ticker-time');
+  const linkEl = document.getElementById('ticker-link');
+  const dEl = document.getElementById('ticker-days');
+  const hEl = document.getElementById('ticker-hours');
+  const mEl = document.getElementById('ticker-mins');
+  const sEl = document.getElementById('ticker-secs');
+  if (!labelEl || !timeEl) return;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  let timer = null;
+  function render() {
+    const diff = TARGET - Date.now();
+
+    if (diff <= 0) {
+      if (timer) clearInterval(timer);
+      labelEl.textContent = '🔥 PRIMALS is minting now';
+      timeEl.style.display = 'none';
+      if (linkEl) {
+        linkEl.textContent = 'Mint now →';
+        linkEl.style.display = 'inline';
+      }
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    dEl.textContent = pad(days);
+    hEl.textContent = pad(hours);
+    mEl.textContent = pad(mins);
+    sEl.textContent = pad(secs);
+  }
+
+  render();
+  timer = setInterval(render, 1000);
+})();
+
+// Art contest countdown — compact D:H:M:S timer, target date shown below the frame.
+// On expiry: mute the whole contest section and show the "ended, winners on mint day" banner
+// so the spotlight shifts to the Orbis mint section above it.
 (function() {
   const TARGET = Date.UTC(2026, 7, 15, 17, 0, 0); // 15 Aug 2026, 5:00 PM UTC
 
+  const contestSection = document.getElementById('contest');
   const unitsEl = document.getElementById('contest-countdown-units');
   const endedEl = document.getElementById('contest-countdown-ended');
+  const bannerEl = document.getElementById('contest-ended-banner');
   const dEl = document.getElementById('cc-days');
   const hEl = document.getElementById('cc-hours');
   const mEl = document.getElementById('cc-mins');
@@ -2811,6 +2982,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       if (timer) clearInterval(timer);
       unitsEl.style.display = 'none';
       endedEl.style.display = 'block';
+      if (contestSection) contestSection.classList.add('contest-ended');
       return;
     }
 

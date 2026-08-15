@@ -104,6 +104,27 @@
 
   #top-ticker .ticker-label { flex-shrink: 0; opacity: 0.95; }
 
+  #top-ticker .ticker-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  #top-ticker .ticker-icon {
+    display: block;
+    height: 18px;
+    width: 18px;
+    flex-shrink: 0;
+  }
+  #top-ticker .ticker-icon-claw {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  #top-ticker .ticker-icon-orbis {
+    width: auto;
+    object-fit: contain;
+  }
+
   #top-ticker .ticker-time {
     flex-shrink: 0;
     font-family: 'Cinzel', serif;
@@ -129,6 +150,7 @@
       gap: 0.4rem;
       padding: 0 0.75rem;
     }
+    #top-ticker .ticker-icon { height: 15px; width: 15px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -2252,7 +2274,11 @@
 </div>
 
 <div id="top-ticker" role="status" aria-live="polite">
-  <span class="ticker-label" id="ticker-label">🔥 Minting on Orbis in</span>
+  <span class="ticker-icons">
+    <img src="primals-claw.jpg" alt="" class="ticker-icon ticker-icon-claw" />
+    <img src="orbis-logo.png" alt="" class="ticker-icon ticker-icon-orbis" />
+  </span>
+  <span class="ticker-label" id="ticker-label">Minting on Orbis in</span>
   <span class="ticker-time" id="ticker-time">
     <span id="ticker-days">00</span>d <span id="ticker-hours">00</span>h <span id="ticker-mins">00</span>m <span id="ticker-secs">00</span>s
   </span>
@@ -2887,7 +2913,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     if (diff <= 0) {
       if (timer) clearInterval(timer);
-      labelEl.textContent = 'AWAKENING NOW';
+      labelEl.textContent = 'AWAKEN YOUR PRIMAL NOW';
       countdownEl.style.display = 'none';
       if (mintBtn) {
         mintBtn.textContent = 'MINT ON ORBIS';
@@ -2932,7 +2958,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     if (diff <= 0) {
       if (timer) clearInterval(timer);
-      labelEl.textContent = '🔥 PRIMALS is minting now';
+      labelEl.textContent = 'AWAKENING NOW ON ORBIS';
       timeEl.style.display = 'none';
       if (linkEl) {
         linkEl.textContent = 'Mint now →';
